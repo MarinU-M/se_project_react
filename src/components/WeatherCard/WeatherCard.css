@@ -1,0 +1,22 @@
+@import url(../../fonts/fonts.css);
+
+.weather {
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+  position: relative;
+  margin: 30px 0;
+}
+
+.weather__temperature {
+  margin: 0;
+  font-size: 36px;
+  line-height: 40px;
+  color: #fff;
+  position: absolute;
+  top: 24px;
+  left: 16px;
+}
+
+.weather__image {
+  width: 100%;
+}

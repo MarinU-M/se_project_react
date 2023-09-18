@@ -9,25 +9,23 @@ const currentDate = new Date().toLocaleString("default", {
 
 function Header() {
   return (
-    <div>
-      <header className="header">
-        <div className="header__logo">
-          <div>
-            <img src={logo} alt="logo" className="header__logoImg" />
-          </div>
-          <div>{currentDate}</div>
+    <header className="header">
+      <div className="header__logo">
+        <div>
+          <img src={logo} alt="logo" className="header__logoImg" />
         </div>
-        <div className="header__profile">
-          <div>
-            <button className="header__addBtn">+ Add clothes</button>
-          </div>
-          <div>name</div>
-          <div>
-            <img src={avatar} alt="avatar" className="header__avatar" />
-          </div>
+        <div>{currentDate}</div>
+      </div>
+      <div className="header__profile">
+        <div>
+          <button className="header__addBtn">+ Add clothes</button>
         </div>
-      </header>
-    </div>
+        <div>name</div>
+        <div>
+          <img src={avatar} alt="avatar" className="header__avatar" />
+        </div>
+      </div>
+    </header>
   );
 }
 

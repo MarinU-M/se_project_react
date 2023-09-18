@@ -1,1 +1,31 @@
-// The WeatherCard receives data from its parent (props chain example: App → Main → WeatherCard). The weather data itself can be a big object, but we only need the temperature to render in the card. The measurement units aren’t important at this stage. We’ll only use Fahrenheit for now.
+// The WeatherCard receives data from its parent (props chain example: App → Main → WeatherCard).
+// The weather data itself can be a big object, but we only need the temperature to render in the card.
+// The measurement units aren’t important at this stage. We’ll only use Fahrenheit for now.
+import "./WeatherCard.css";
+import daySunny from "../../images/daySunny.svg";
+import dayCloudy from "../../images/dayCloudy.svg";
+import dayRainy from "../../images/dayRainy.svg";
+
+const weatherImgs = [
+  { url: daySunny, day: true, type: "sunny" },
+  { url: dayCloudy, day: true, type: "cloudy" },
+  { url: dayRainy, day: true, type: "rainy" },
+];
+
+function WeatherCard({ day, type }) {
+  console.log(day);
+  const imgSrc = weatherImgs.filter((i) => {
+    // console.log(i);
+    return i.day === day && i.type === type;
+  });
+  const imgSrcUrl = imgSrc[0].url || "";
+  console.log(imgSrcUrl);
+  return (
+    <section className="weather">
+      <p className="weather__temperature">100F</p>
+      <img className="weather__image" src={imgSrcUrl} />
+    </section>
+  );
+}
+
+export default WeatherCard;
