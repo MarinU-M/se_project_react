@@ -1,0 +1,26 @@
+@import url(../../fonts/fonts.css);
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+}
+
+.item__heading {
+  font-size: 20px;
+  line-height: 25px;
+  margin: 0 0 30px 0;
+}
+
+.item__card-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
