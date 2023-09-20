@@ -7,7 +7,7 @@ const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
-function Header() {
+function Header({ onClickModal }) {
   return (
     <header className="header">
       <div className="header__logo">
@@ -18,7 +18,9 @@ function Header() {
       </div>
       <div className="header__profile">
         <div>
-          <button className="header__addBtn">+ Add clothes</button>
+          <button className="header__addBtn" onClick={onClickModal}>
+            + Add clothes
+          </button>
         </div>
         <div>name</div>
         <div>

@@ -8,7 +8,7 @@ function ModalWithForm({
   children,
   name,
   title,
-  onClose,
+  onClickModal,
   btnText = "Add garment",
 }) {
   console.log("this is modal");
@@ -19,12 +19,14 @@ function ModalWithForm({
         <button
           className="modal__close"
           type="button"
-          onClick={onClose}
+          onClick={onClickModal}
         ></button>
         {/* The form’s title */}
         <h3 className="modal__title">{title}</h3>
         {/* The <form> tag itself. */}
-        <form name={name}>{children}</form>
+        <form className="modal__form" name={name}>
+          {children}
+        </form>
         {/* The button that submits the modal. */}
         <button className="modal__submit" type="submit">
           {btnText}
