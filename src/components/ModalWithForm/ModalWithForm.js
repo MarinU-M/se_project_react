@@ -15,3 +15,18 @@
 // The rest of the content (i.e., the inputs and their labels) will vary from form to form. These should be added as children of ModalWithForm, and then accessed via the special children prop.
 // One more prop is onClose, which should be called when the user clicks on the close button, clicks outside of the modal content, or presses the Escape button on the keyboard.
 // When styling the form fields, pay close attention to how the styles differ depending on the state of the element’s state. To refresh your memory about how to style form elements, refer back to the relevant lessons in the form chapter from sprint 2.
+import "./ModalWithForm.css";
+
+function ModalWithForm({ children, btnText = "Add garment", title }) {
+  console.log("this is modal");
+  return (
+    <div>
+      <h3>{title}</h3>
+      <form>
+        <button type="submit">{btnText}</button>
+      </form>
+    </div>
+  );
+}
+
+export default ModalWithForm;

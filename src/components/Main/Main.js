@@ -8,11 +8,12 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
 function Main() {
+  const temp = "100° F";
   return (
     <main>
-      <WeatherCard day={true} type="rainy" />
+      <WeatherCard day={true} type="rainy" temp={temp} />
       <section className="item">
-        <p className="item__heading">Today is 75° F / You may want to wear:</p>
+        <p className="item__heading">Today is {temp} / You may want to wear:</p>
         <ul className="item__card-list">
           {defaultClothingItems.map((item) => (
             <ItemCard item={item} />
