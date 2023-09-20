@@ -4,8 +4,10 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
+  const temp = "100° F";
   const [activeModal, setActiveModal] = useState("");
   const handleOpenModal = () => {
     setActiveModal("create");
@@ -13,11 +15,18 @@ function App() {
   const handleCloseModal = () => {
     setActiveModal("");
   };
+
+  const [selectedCard, setSelectedCard] = useState({});
+  const handleSelectedCard = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+
   return (
     <>
       <div className="app">
         <Header onClickModal={handleOpenModal} />
-        <Main />
+        <Main temp={temp} onSelectedCard={handleSelectedCard} />
         <Footer />
         {activeModal === "create" && (
           <ModalWithForm title="New garment" onClickModal={handleCloseModal}>
@@ -37,7 +46,7 @@ function App() {
               <input
                 className="modal__input"
                 type="url"
-                name="url"
+                name="link"
                 minLength="1"
                 placeholder="Image URL"
                 required
@@ -59,6 +68,12 @@ function App() {
               </li>
             </ul>
           </ModalWithForm>
+        )}
+        {activeModal === "preview" && (
+          <ItemModal
+            selectedCard={selectedCard}
+            onClickModal={handleCloseModal}
+          />
         )}
       </div>
     </>

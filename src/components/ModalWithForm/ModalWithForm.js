@@ -11,7 +11,6 @@ function ModalWithForm({
   onClickModal,
   btnText = "Add garment",
 }) {
-  console.log("this is modal");
   return (
     <div className={`modal modal_type_${name}`}>
       <div className="modal__content">

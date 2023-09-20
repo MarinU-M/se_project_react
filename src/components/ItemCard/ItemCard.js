@@ -4,10 +4,15 @@
 
 import "./ItemCard.css";
 
-function ItemCard({ item }) {
+function ItemCard({ item, onSelectedCard }) {
   return (
     <li className="item__card">
-      <img className="item__image" src={item.link} alt={item.name} />
+      <img
+        className="item__image"
+        src={item.link}
+        alt={item.name}
+        onClick={() => onSelectedCard(item)}
+      />
       <div className="item__label">
         <p className="item__name">{item.name}</p>
       </div>

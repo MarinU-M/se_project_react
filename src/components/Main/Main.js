@@ -7,8 +7,7 @@ import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
-function Main() {
-  const temp = "100° F";
+function Main({ temp, onSelectedCard }) {
   return (
     <main>
       <WeatherCard day={true} type="rainy" temp={temp} />
@@ -18,7 +17,7 @@ function Main() {
         </h2>
         <ul className="item__card-list">
           {defaultClothingItems.map((item) => (
-            <ItemCard item={item} />
+            <ItemCard item={item} onSelectedCard={onSelectedCard} />
           ))}
         </ul>
       </section>
