@@ -13,7 +13,9 @@ function Main() {
     <main>
       <WeatherCard day={true} type="rainy" temp={temp} />
       <section className="item">
-        <p className="item__heading">Today is {temp} / You may want to wear:</p>
+        <h2 className="item__heading">
+          Today is {temp} / You may want to wear:
+        </h2>
         <ul className="item__card-list">
           {defaultClothingItems.map((item) => (
             <ItemCard item={item} />
