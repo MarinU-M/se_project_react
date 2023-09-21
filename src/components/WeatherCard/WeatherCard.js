@@ -13,13 +13,11 @@ const weatherImgs = [
 ];
 
 function WeatherCard({ day, type, weatherTemp = "" }) {
-  console.log(day);
   const imgSrc = weatherImgs.filter((i) => {
     // console.log(i);
     return i.day === day && i.type === type;
   });
   const imgSrcUrl = imgSrc[0].url || "";
-  console.log(imgSrcUrl);
   return (
     <section className="weather">
       <h1 className="weather__temperature">{weatherTemp}° F</h1>

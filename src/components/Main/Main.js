@@ -19,9 +19,7 @@ function Main({ weatherTemp, onSelectedCard }) {
       return "cold";
     }
   }, [weatherTemp]);
-  console.log(weatherType);
   const filteredItems = defaultClothingItems.filter((item) => {
-    console.log(item);
     return item.weather.toLowerCase() === weatherType;
   });
 
