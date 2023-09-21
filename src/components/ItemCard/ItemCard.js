@@ -3,6 +3,7 @@
 // when the user clicks on the image, you need to call the state change function handleCardClick() that ItemCard receives as a prop.
 
 import "./ItemCard.css";
+import likeBtn from "../../images/likeBtn.svg";
 
 function ItemCard({ item, onSelectedCard }) {
   return (
@@ -15,6 +16,7 @@ function ItemCard({ item, onSelectedCard }) {
       />
       <div className="item__label">
         <p className="item__name">{item.name}</p>
+        <img src={likeBtn} alt="like button" className="item__like" />
       </div>
     </li>
   );

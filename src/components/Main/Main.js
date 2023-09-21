@@ -25,7 +25,7 @@ function Main({ weatherTemp, onSelectedCard }) {
 
   return (
     <main>
-      <WeatherCard day={true} type="rainy" weatherTemp={weatherTemp} />
+      <WeatherCard day={true} type="sunny" weatherTemp={weatherTemp} />
       <section className="item">
         <h2 className="item__heading">
           Today is {weatherTemp}° F/ You may want to wear:

@@ -1,8 +1,9 @@
 @import url(../../vendor/fonts.css);
 
 .app {
-  margin: 30px 40px;
+  margin: 30px auto;
   padding: 0;
+  max-width: 1360px;
 }
 
 .modal__label {
