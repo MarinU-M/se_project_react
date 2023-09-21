@@ -13,8 +13,9 @@
   line-height: 40px;
   color: #fff;
   position: absolute;
-  top: 24px;
+  top: 50%;
   left: 20px;
+  transform: translateY(-50%);
 }
 
 .weather__image {
