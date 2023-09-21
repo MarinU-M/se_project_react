@@ -7,7 +7,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
-  const temp = "100° F";
+  const weatherTemp = "100";
   const [activeModal, setActiveModal] = useState("");
   const handleOpenModal = () => {
     setActiveModal("create");
@@ -26,7 +26,7 @@ function App() {
     <>
       <div className="app">
         <Header onClickModal={handleOpenModal} />
-        <Main temp={temp} onSelectedCard={handleSelectedCard} />
+        <Main weatherTemp={weatherTemp} onSelectedCard={handleSelectedCard} />
         <Footer />
         {activeModal === "create" && (
           <ModalWithForm title="New garment" onClickModal={handleCloseModal}>

@@ -1,4 +1,4 @@
-@import url(../../fonts/fonts.css);
+@import url(../../vendor/fonts.css);
 
 .weather {
   font-family: "CabinetGrotesk-Bold";
@@ -14,7 +14,7 @@
   color: #fff;
   position: absolute;
   top: 24px;
-  left: 16px;
+  left: 20px;
 }
 
 .weather__image {

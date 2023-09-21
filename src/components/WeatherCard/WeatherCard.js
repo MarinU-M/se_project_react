@@ -12,7 +12,7 @@ const weatherImgs = [
   { url: dayRainy, day: true, type: "rainy" },
 ];
 
-function WeatherCard({ day, type, temp = "" }) {
+function WeatherCard({ day, type, weatherTemp = "" }) {
   console.log(day);
   const imgSrc = weatherImgs.filter((i) => {
     // console.log(i);
@@ -22,7 +22,7 @@ function WeatherCard({ day, type, temp = "" }) {
   console.log(imgSrcUrl);
   return (
     <section className="weather">
-      <h1 className="weather__temperature">{temp}</h1>
+      <h1 className="weather__temperature">{weatherTemp}° F</h1>
       <img className="weather__image" src={imgSrcUrl} alt={type} />
     </section>
   );
