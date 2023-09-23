@@ -7,14 +7,16 @@ const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
-function Header({ onClickModal }) {
+function Header({ address, onClickModal }) {
   return (
     <header className="header">
       <div className="header__logo">
         <div>
           <img src={logo} alt="logo" className="header__logoImg" />
         </div>
-        <div>{currentDate}</div>
+        <div>
+          {currentDate}, {address}
+        </div>
       </div>
       <div className="header__profile">
         <div>

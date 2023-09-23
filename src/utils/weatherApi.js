@@ -54,7 +54,12 @@ const getTime = (data) => {
     return false;
   }
 };
-export { getWeatherForecast, roundTemperature, getWeather, getTime };
+
+const getPlace = (data) => {
+  const name = data.name;
+  return name;
+};
+export { getWeatherForecast, roundTemperature, getWeather, getTime, getPlace };
 
 // const weatherData = {
 //   coord: { lon: 10.99, lat: 44.34 },

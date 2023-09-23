@@ -9,7 +9,8 @@ function WeatherCard({ day, type, weatherTemp = "" }) {
     return i.day === day && i.type === type;
   });
   console.log(imgSrc);
-  const imgSrcUrl = imgSrc.url || "";
+
+  const imgSrcUrl = imgSrc[0]?.url || "";
   return (
     <section className="weather">
       <h1 className="weather__temperature">{weatherTemp}° F</h1>

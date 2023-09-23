@@ -10,6 +10,7 @@ import {
   roundTemperature,
   getWeather,
   getTime,
+  getPlace,
 } from "../../utils/weatherApi";
 
 function App() {
@@ -18,30 +19,47 @@ function App() {
   const handleOpenModal = () => {
     setActiveModal("create");
   };
+
+  // handle close modal
   const handleCloseModal = () => {
-    console.log(this);
     setActiveModal("");
   };
+  useEffect(() => {
+    const handleEscClose = (evt) => {
+      if (evt.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  });
 
+  // card popup
   const [selectedCard, setSelectedCard] = useState({});
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
+  // set weather
   const [temp, setTemp] = useState(0);
   const [weatherType, setWeatherType] = useState("");
   const [time, setTime] = useState(null);
+  const [address, setAddress] = useState("");
   useEffect(() => {
     getWeatherForecast()
       .then((data) => {
         const temperature = roundTemperature(data);
         const weather = getWeather(data);
         const time = getTime(data);
+        const place = getPlace(data);
 
         setTemp(temperature);
         setWeatherType(weather);
         setTime(time);
+        setAddress(place);
       })
       .catch((err) => {
         console.err(err);
@@ -50,7 +68,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header onClickModal={handleOpenModal} />
+      <Header address={address} onClickModal={handleOpenModal} />
       <Main
         weatherTemp={temp}
         type={weatherType}
@@ -62,7 +80,7 @@ function App() {
         <ModalWithForm
           title="New garment"
           name="add-garment"
-          onClickModal={handleCloseModal}
+          onClose={handleCloseModal}
         >
           <label className="modal__label">
             Name
@@ -110,10 +128,7 @@ function App() {
         </ModalWithForm>
       )}
       {activeModal === "preview" && (
-        <ItemModal
-          selectedCard={selectedCard}
-          onClickModal={handleCloseModal}
-        />
+        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
       )}
     </div>
   );

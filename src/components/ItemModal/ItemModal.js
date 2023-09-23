@@ -4,7 +4,7 @@
 // The item card data that you need to render
 import "./ItemModal.css";
 
-function ItemModal({ selectedCard, onClickModal }) {
+function ItemModal({ selectedCard, onClose }) {
   console.log(ItemModal);
   return (
     <div className={`modal`}>
@@ -12,7 +12,7 @@ function ItemModal({ selectedCard, onClickModal }) {
         <button
           className="modal__close"
           type="button"
-          onClick={onClickModal}
+          onClick={onClose}
         ></button>
         <img
           className="modal__image"
