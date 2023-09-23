@@ -61,7 +61,7 @@
 }
 
 .modal__submit {
-  margin: 0 auto 25px 25px;
+  margin: 25px auto 0 0;
   font-family: "CabinetGrotesk-Bold";
   font-size: 16px;
   line-height: 20px;

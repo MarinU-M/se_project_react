@@ -3,6 +3,19 @@
 // To refresh your memory about how to style form elements, refer back to the relevant lessons in the form chapter from sprint 2.
 import "./ModalWithForm.css";
 
+function close() {
+  console.log(this);
+  // this.element.remove();
+  // document.removeEventListener("keydown", this._closeByEscape);
+}
+
+// // _handleEscClose() for closing the popup by pressing the Esc key.
+// _closeByEscape = (evt) => {
+//   if (evt.key === "Escape") {
+//     this.close();
+//   }
+// };
+
 // add the corresponding title, name, and buttonText props, then substitute their values inside the JSX
 function ModalWithForm({
   children,
@@ -25,11 +38,11 @@ function ModalWithForm({
         {/* The <form> tag itself. */}
         <form className="modal__form" name={name}>
           {children}
+          {/* The button that submits the modal. */}
+          <button className="modal__submit" type="submit">
+            {btnText}
+          </button>
         </form>
-        {/* The button that submits the modal. */}
-        <button className="modal__submit" type="submit">
-          {btnText}
-        </button>
       </div>
     </div>
   );

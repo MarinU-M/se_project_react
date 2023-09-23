@@ -21,13 +21,40 @@ const roundTemperature = (data) => {
   return Math.round(temperature);
 };
 
-const currentWeather = (data) => {
+const getWeather = (data) => {
   const weather = data.weather;
-  const main = weather[0].main;
-  return main;
+  const main = weather[0].id;
+  if (main < 300) {
+    return "storm";
+  }
+  if (main < 600) {
+    return "rainy";
+  }
+  if (main < 700) {
+    return "snow";
+  }
+  if (main < 800) {
+    return "fog";
+  }
+  if (main > 800) {
+    return "cloudy";
+  } else {
+    return "sunny";
+  }
 };
 
-export { getWeatherForecast, roundTemperature, currentWeather };
+const getTime = (data) => {
+  const now = Date.now();
+  const sys = data.sys;
+  const sunrise = sys.sunrise;
+  const sunset = sys.sunset;
+  if (now >= sunrise && now < sunset) {
+    return true;
+  } else {
+    return false;
+  }
+};
+export { getWeatherForecast, roundTemperature, getWeather, getTime };
 
 // const weatherData = {
 //   coord: { lon: 10.99, lat: 44.34 },

@@ -3,12 +3,12 @@
 
 // Wrap the ItemCard component into the unordered list and use the filter() and map() methods.
 import { useMemo } from "react";
-import defaultClothingItems from "../../utils/constants";
+import { defaultClothingItems } from "../../utils/constants";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
-function Main({ weatherTemp, onSelectedCard }) {
+function Main({ weatherTemp, type, day, onSelectedCard }) {
   // Clothing item cards, which are filtered based on the current weather.
   const weatherType = useMemo(() => {
     if (weatherTemp >= 86) {
@@ -25,14 +25,18 @@ function Main({ weatherTemp, onSelectedCard }) {
 
   return (
     <main>
-      <WeatherCard day={true} type="sunny" weatherTemp={weatherTemp} />
+      <WeatherCard day={day} type={type} weatherTemp={weatherTemp} />
       <section className="item">
         <h2 className="item__heading">
           Today is {weatherTemp}° F/ You may want to wear:
         </h2>
         <ul className="item__card-list">
           {filteredItems.map((item) => (
-            <ItemCard item={item} onSelectedCard={onSelectedCard} />
+            <ItemCard
+              key={item._id}
+              item={item}
+              onSelectedCard={onSelectedCard}
+            />
           ))}
         </ul>
       </section>
