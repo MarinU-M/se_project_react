@@ -8,7 +8,7 @@ function WeatherCard({ day, type, weatherTemp = "" }) {
   const imgSrc = weatherImgs.filter((i) => {
     return i.day === day && i.type === type;
   });
-  console.log(imgSrc);
+  // console.log(imgSrc);
 
   const imgSrcUrl = imgSrc[0]?.url || "";
   return (
