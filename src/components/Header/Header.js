@@ -1,6 +1,7 @@
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",
@@ -19,15 +20,12 @@ function Header({ address, onClickModal }) {
         </div>
       </div>
       <div className="header__profile">
-        <div>
-          <button className="header__addBtn" onClick={onClickModal}>
-            + Add clothes
-          </button>
-        </div>
+        <ToggleSwitch />
+        <button className="header__addBtn" onClick={onClickModal}>
+          + Add clothes
+        </button>
         <div>name</div>
-        <div>
-          <img src={avatar} alt="avatar" className="header__avatar" />
-        </div>
+        <img src={avatar} alt="avatar" className="header__avatar" />
       </div>
     </header>
   );

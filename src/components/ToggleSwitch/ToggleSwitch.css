@@ -1,0 +1,70 @@
+.switch {
+  display: flex;
+  position: relative;
+  color: #7e7e7e;
+  transition: color linear 0.1s 0.1s;
+}
+
+.switch:hover {
+  color: #000;
+}
+
+.switch__box {
+  border-radius: 20px;
+  border: 2px solid #7e7e7e;
+  width: 56px;
+  height: 28px;
+  appearance: none;
+  margin: 0;
+  color: #7e7e7e;
+  transition: border-color linear 0.1s 0.1s;
+}
+
+.switch__box:hover {
+  border-color: #000;
+}
+
+.switch__toggle {
+  border-radius: 20px;
+  width: 28px;
+  height: 28px;
+  background-color: #000;
+  text-align: center;
+  position: absolute;
+  cursor: pointer;
+  transition: width linear 0.1s 0.1s;
+}
+.switch__toggle:hover {
+  width: 30px;
+}
+.switch__toggle_C {
+  top: 0;
+  right: 0;
+}
+
+.switch__toggle_F {
+  top: 0;
+  left: 0;
+}
+
+.switch__text-C {
+  position: absolute;
+  margin: 0;
+  top: 6px;
+  right: 10px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.switch__text-F {
+  position: absolute;
+  margin: 0;
+  top: 6px;
+  left: 10px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.switch__active {
+  color: #fff;
+}
