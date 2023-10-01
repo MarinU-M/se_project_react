@@ -16,14 +16,17 @@ const getWeatherForecast = () => {
 };
 
 const roundTemperature = (data) => {
-  const main = data.main;
-  const temperature = main.temp;
-  return Math.round(temperature);
+  const temperature = data.main.temp;
+  const weather = {
+    F: Math.round(temperature),
+    C: Math.round(((temperature - 32) * 5) / 9),
+  };
+
+  return weather;
 };
 
 const getWeather = (data) => {
-  const weather = data.weather;
-  const main = weather[0].id;
+  const main = data.weather[0].id;
   if (main < 300) {
     return "storm";
   }
@@ -45,9 +48,8 @@ const getWeather = (data) => {
 
 const getTime = (data) => {
   const now = Date.now();
-  const sys = data.sys;
-  const sunrise = sys.sunrise;
-  const sunset = sys.sunset;
+  const sunrise = data.sys.sunrise;
+  const sunset = data.sys.sunset;
   if (now >= sunrise && now < sunset) {
     return true;
   } else {
