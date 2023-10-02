@@ -1,0 +1,44 @@
+.clothes-section {
+  /* background-color: brown; */
+  margin: 0;
+}
+
+.clothes-section__title {
+  display: flex;
+  margin: 0 0 16px 0;
+}
+
+.clothes-section__heading {
+  font-family: "CabinetGrotesk-Bold";
+  font-size: 20px;
+  line-height: 25px;
+  margin: 0;
+}
+
+.clothes-section__addBtn {
+  background: transparent center no-repeat;
+  border: none;
+  outline: none;
+  font-family: "CabinetGrotesk-Bold";
+  font-size: 20px;
+  line-height: 25px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 auto 0 20px;
+  opacity: 60%;
+  transition: opacity linear 0.1s 0.1s;
+}
+
+.clothes-section__addBtn:hover {
+  opacity: 100%;
+}
+
+.clothes-section__card-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
