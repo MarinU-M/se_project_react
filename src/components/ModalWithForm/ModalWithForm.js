@@ -9,11 +9,13 @@ function ModalWithForm({
   name,
   title,
   onClose,
-  btnText = "Add garment",
+  btnText,
+  isOpen,
+  onSubmit,
 }) {
   return (
-    <div className={`modal modal_type_${name}`}>
-      <div className="modal__content">
+    <div className={`modal modal_type_${name}`} onClick={onClose}>
+      <div className="modal__content" onClick={(evt) => evt.stopPropagation()}>
         {/* modal close button for clicks on button, outside of the modal, or presses Esc*/}
         <button
           className="modal__close"
@@ -23,7 +25,7 @@ function ModalWithForm({
         {/* The form’s title */}
         <h3 className="modal__title">{title}</h3>
         {/* The <form> tag itself. */}
-        <form className="modal__form" name={name}>
+        <form className="modal__form" name={name} onSubmit={onSubmit}>
           {children}
           {/* The button that submits the modal. */}
           <button className="modal__submit" type="submit">

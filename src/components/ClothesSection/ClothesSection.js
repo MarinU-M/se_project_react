@@ -4,7 +4,6 @@ import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants";
 
 function ClothesSection() {
-  console.log("ClothesSection");
   return (
     <div className="clothes-section">
       <div className="clothes-section__title">

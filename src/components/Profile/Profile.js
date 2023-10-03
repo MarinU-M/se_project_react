@@ -4,7 +4,6 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import "./Profile.css";
 
 function Profile() {
-  console.log("profile");
   return (
     <div className="profile">
       <SideBar />

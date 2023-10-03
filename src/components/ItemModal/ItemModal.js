@@ -8,21 +8,24 @@ function ItemModal({ selectedCard, onClose }) {
   console.log(ItemModal);
   return (
     <div className={`modal`}>
-      <div className="modal__content">
+      <div className="item-modal__content">
         <button
-          className="modal__close"
+          className="item-modal__close"
           type="button"
           onClick={onClose}
         ></button>
         <img
-          className="modal__image"
+          className="item-modal__image"
           src={selectedCard.link}
           alt={selectedCard.name}
         />
-        <p className="modal__description">
-          <span>{selectedCard.name}</span>
-          <span>Weather: {selectedCard.weather}</span>
-        </p>
+        <div className="item-modal__text">
+          <p className="item-modal__description">
+            <span>{selectedCard.name}</span>
+            <span>Weather: {selectedCard.weather}</span>
+          </p>
+          <button className="item-modal__deleteBtn">Delete item</button>
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import "./SideBar.css";
 import avatar from "../../images/avatar.svg";
 
 function SideBar() {
-  //   console.log("SideBar");
   return (
     <div className="sidebar">
       <img src={avatar} alt="avatar" className="sidebar__avatar" />

@@ -4,8 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+// import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import {
@@ -17,15 +18,23 @@ import {
 } from "../../utils/weatherApi";
 
 function App() {
-  // handle modal
   const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [temp, setTemp] = useState(0);
+  const [weatherType, setWeatherType] = useState("");
+  const [time, setTime] = useState(null);
+  const [address, setAddress] = useState("");
+
+  // open and close modal
   const handleOpenModal = () => {
     setActiveModal("create");
   };
-
   const handleCloseModal = () => {
     setActiveModal("");
   };
+
+  // close modal by pressing esc
   useEffect(() => {
     const handleEscClose = (evt) => {
       if (evt.key === "Escape") {
@@ -38,19 +47,13 @@ function App() {
     };
   });
 
-  // card popup
-  const [selectedCard, setSelectedCard] = useState({});
+  // handle modal of selected card
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
   // set weather
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [temp, setTemp] = useState(0);
-  const [weatherType, setWeatherType] = useState("");
-  const [time, setTime] = useState(null);
-  const [address, setAddress] = useState("");
   useEffect(() => {
     getWeatherForecast()
       .then((data) => {
@@ -69,9 +72,15 @@ function App() {
       });
   }, []);
 
+  // switch fahrenheit or celcius
   const handleToggleSwitch = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+  };
+
+  // add item
+  const addItem = (evt) => {
+    console.log(evt);
   };
 
   return (
@@ -96,55 +105,11 @@ function App() {
 
         <Footer />
         {activeModal === "create" && (
-          <ModalWithForm
-            title="New garment"
-            name="add-garment"
-            onClose={handleCloseModal}
-          >
-            <label className="modal__label">
-              Name
-              <input
-                className="modal__input"
-                type="text"
-                name="name"
-                minLength="1"
-                placeholder="Name"
-                required
-              />
-            </label>
-            <label className="modal__label">
-              Image
-              <input
-                className="modal__input"
-                type="url"
-                name="link"
-                minLength="1"
-                placeholder="Image URL"
-                required
-              />
-            </label>
-            <h4 className="modal__radio-title">Select the weather type:</h4>
-            <ul className="modal__radio-list">
-              <li className="modal__radio-item">
-                <label className="modal__radio-label">
-                  <input type="radio" name="weather" id="hot" value="hot" />
-                  Hot
-                </label>
-              </li>
-              <li className="modal__radio-item">
-                <label className="modal__radio-label">
-                  <input type="radio" name="weather" id="warm" value="warm" />
-                  Warm
-                </label>
-              </li>
-              <li className="modal__radio-item">
-                <label className="modal__radio-label">
-                  <input type="radio" name="weather" id="cold" value="cold" />
-                  Cold
-                </label>
-              </li>
-            </ul>
-          </ModalWithForm>
+          <AddItemModal
+            isOpen={activeModal === "create"}
+            onAddItem={addItem}
+            onCloseModal={handleCloseModal}
+          />
         )}
         {activeModal === "preview" && (
           <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
