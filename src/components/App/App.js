@@ -7,8 +7,14 @@ import Footer from "../Footer/Footer";
 // import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import Profile from "../Profile/Profile";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import {
+  getClothingItems,
+  addNewClothes,
+  deleteClothingItem,
+} from "../../utils/api";
 import {
   getWeatherForecast,
   roundTemperature,
@@ -25,6 +31,7 @@ function App() {
   const [weatherType, setWeatherType] = useState("");
   const [time, setTime] = useState(null);
   const [address, setAddress] = useState("");
+  const [clothingItems, setClothingItems] = useState([]);
 
   // open and close modal
   const handleOpenModal = () => {
@@ -32,6 +39,46 @@ function App() {
   };
   const handleCloseModal = () => {
     setActiveModal("");
+  };
+
+  // handle modal of selected card
+  const handleSelectedCard = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+
+  // handle modal of item delete confirmation
+  const handleConfirmModal = () => {
+    setActiveModal("confirm");
+  };
+
+  // switch fahrenheit or celcius
+  const handleToggleSwitch = () => {
+    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+  };
+
+  // add clothing item
+  const handleAddItem = (item) => {
+    addNewClothes(item)
+      .then((item) => {
+        setClothingItems([item, ...clothingItems]);
+        handleCloseModal();
+      })
+      .catch((err) => console.log(`addItem: ${err}`));
+  };
+
+  // delete clothing items
+  const handleDeleteItem = (selectedItem) => {
+    deleteClothingItem(selectedItem._id)
+      .then((selectedItem) => {
+        const updatedClothingItems = clothingItems.filter((item) => {
+          return item._id !== selectedItem._id;
+        });
+        setClothingItems(updatedClothingItems);
+        handleCloseModal();
+      })
+      .catch((err) => console.log(`deleteItem: ${err}`));
   };
 
   // close modal by pressing esc
@@ -46,12 +93,6 @@ function App() {
       document.removeEventListener("keydown", handleEscClose);
     };
   });
-
-  // handle modal of selected card
-  const handleSelectedCard = (card) => {
-    setActiveModal("preview");
-    setSelectedCard(card);
-  };
 
   // set weather
   useEffect(() => {
@@ -68,20 +109,16 @@ function App() {
         setAddress(place);
       })
       .catch((err) => {
-        console.err(err);
+        console.log(`weatherData: ${err}`);
       });
   }, []);
 
-  // switch fahrenheit or celcius
-  const handleToggleSwitch = () => {
-    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
-    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
-  };
-
-  // add item
-  const addItem = (evt) => {
-    console.log(evt);
-  };
+  // load clothing items
+  useEffect(() => {
+    getClothingItems()
+      .then((items) => setClothingItems(items))
+      .catch((err) => console.log(`setClothingItems: ${err}`));
+  }, []);
 
   return (
     <div className="app">
@@ -96,10 +133,15 @@ function App() {
               type={weatherType}
               day={time}
               onSelectedCard={handleSelectedCard}
+              clothingItems={clothingItems}
             />
           </Route>
           <Route path="/profile">
-            <Profile onSelectedCard={handleSelectedCard} />
+            <Profile
+              onSelectedCard={handleSelectedCard}
+              clothingItems={clothingItems}
+              onClickModal={handleOpenModal}
+            />
           </Route>
         </Switch>
 
@@ -107,12 +149,23 @@ function App() {
         {activeModal === "create" && (
           <AddItemModal
             isOpen={activeModal === "create"}
-            onAddItem={addItem}
-            onCloseModal={handleCloseModal}
+            onAddItem={handleAddItem}
+            onClose={handleCloseModal}
           />
         )}
         {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+          <ItemModal
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            onDelete={handleConfirmModal}
+          />
+        )}
+        {activeModal === "confirm" && (
+          <DeleteConfirmationModal
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            onSubmit={handleDeleteItem}
+          />
         )}
       </CurrentTemperatureUnitContext.Provider>
     </div>

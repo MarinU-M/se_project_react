@@ -3,11 +3,15 @@ import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import "./Profile.css";
 
-function Profile(onSelectedCard) {
+function Profile({ onSelectedCard, clothingItems, onClickModal }) {
   return (
     <div className="profile">
       <SideBar />
-      <ClothesSection onSelectedCard={onSelectedCard} />
+      <ClothesSection
+        onSelectedCard={onSelectedCard}
+        clothingItems={clothingItems}
+        onClickModal={onClickModal}
+      />
     </div>
   );
 }

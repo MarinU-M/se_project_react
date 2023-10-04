@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
+function AddItemModal({ isOpen, onAddItem, onClose }) {
   // declare state for each input field
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
-  const [radio, setRadio] = useState("");
+  const [weather, setweather] = useState("");
 
   // use a useEffect hook to reset the input field state to empty strings when
   // the modal is opened
@@ -18,7 +18,7 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
   };
 
   const handleRadioChange = (evt) => {
-    setRadio(evt.target.value);
+    setweather(evt.target.value);
   };
   // create onChange handlers corresponding to each state variable
 
@@ -26,15 +26,15 @@ function AddItemModal({ isOpen, onAddItem, onCloseModal }) {
     // prevent default behavior
     evt.preventDefault();
     // call onAddItem with appropriate arguments
-    console.log({ name, link, radio });
-    onAddItem({ name, link, radio });
+    console.log({ name, link, weather });
+    onAddItem({ name, link, weather });
   };
 
   return (
     <ModalWithForm
       title="New garment"
       name="add-garment"
-      onClose={onCloseModal}
+      onClose={onClose}
       isOpen={isOpen}
       btnText="Add garment"
       onSubmit={handleSubmit}

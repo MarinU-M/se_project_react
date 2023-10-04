@@ -3,14 +3,14 @@
 
 // Wrap the ItemCard component into the unordered list and use the filter() and map() methods.
 import { useMemo, useContext } from "react";
-import { defaultClothingItems } from "../../utils/constants";
+// import { defaultClothingItems } from "../../utils/constants";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherTemp, type, day, onSelectedCard }) {
+function Main({ weatherTemp, type, day, onSelectedCard, clothingItems }) {
   // Clothing item cards, which are filtered based on the current weather.
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.[currentTemperatureUnit] || 999;
@@ -23,7 +23,7 @@ function Main({ weatherTemp, type, day, onSelectedCard }) {
       return "cold";
     }
   }, [weatherTemp]);
-  const filteredItems = defaultClothingItems.filter((item) => {
+  const filteredItems = clothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
   });
 
