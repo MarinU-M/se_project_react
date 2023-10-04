@@ -3,11 +3,11 @@ import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import "./Profile.css";
 
-function Profile() {
+function Profile(onSelectedCard) {
   return (
     <div className="profile">
       <SideBar />
-      <ClothesSection />
+      <ClothesSection onSelectedCard={onSelectedCard} />
     </div>
   );
 }

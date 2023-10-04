@@ -3,7 +3,7 @@ import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants";
 
-function ClothesSection() {
+function ClothesSection({ onSelectedCard }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__title">
@@ -17,7 +17,7 @@ function ClothesSection() {
           <ItemCard
             key={item._id}
             item={item}
-            /*onSelectedCard={onSelectedCard}*/
+            onSelectedCard={onSelectedCard}
           />
         ))}
       </ul>

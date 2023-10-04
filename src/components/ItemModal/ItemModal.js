@@ -7,8 +7,11 @@ import "./ItemModal.css";
 function ItemModal({ selectedCard, onClose }) {
   console.log(ItemModal);
   return (
-    <div className={`modal`}>
-      <div className="item-modal__content">
+    <div className={`modal`} onClick={onClose}>
+      <div
+        className="item-modal__content"
+        onClick={(evt) => evt.stopPropagation()}
+      >
         <button
           className="item-modal__close"
           type="button"
