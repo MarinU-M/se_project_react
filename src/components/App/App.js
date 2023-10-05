@@ -64,7 +64,7 @@ function App() {
         setClothingItems([item, ...clothingItems]);
         handleCloseModal();
       })
-      .catch((err) => console.log(`addItem: ${err}`));
+      .catch((err) => console.error(`addItem: ${err}`));
   };
 
   // delete clothing items
@@ -77,7 +77,7 @@ function App() {
         setClothingItems(updatedClothingItems);
         handleCloseModal();
       })
-      .catch((err) => console.log(`deleteItem: ${err}`));
+      .catch((err) => console.error(`deleteItem: ${err}`));
   };
 
   // close modal by pressing esc
@@ -108,7 +108,7 @@ function App() {
         setAddress(place);
       })
       .catch((err) => {
-        console.log(`weatherData: ${err}`);
+        console.error(`weatherData: ${err}`);
       });
   }, []);
 
@@ -116,7 +116,7 @@ function App() {
   useEffect(() => {
     getClothingItems()
       .then((items) => setClothingItems(items))
-      .catch((err) => console.log(`setClothingItems: ${err}`));
+      .catch((err) => console.error(`setClothingItems: ${err}`));
   }, []);
 
   return (

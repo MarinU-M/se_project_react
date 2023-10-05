@@ -9,20 +9,20 @@ const checkServerResponse = (res) => {
   }
 };
 
-// const getClothingItems = () => {
-//   return fetch(`${baseUrl}/items`, {
-//     method: "GET",
-//     headers: headers,
-//   }).then((res) => checkServerResponse(res));
-// };
-
-const getClothingItems = async () => {
-  const res = await fetch(`${baseUrl}/items`, {
+const getClothingItems = () => {
+  return fetch(`${baseUrl}/items`, {
     method: "GET",
     headers: headers,
-  });
-  return checkServerResponse(res);
+  }).then(checkServerResponse);
 };
+
+// const getClothingItems = async () => {
+//   const res = await fetch(`${baseUrl}/items`, {
+//     method: "GET",
+//     headers: headers,
+//   });
+//   return checkServerResponse(res);
+// };
 
 //   getAPIInfo() {
 //     return Promise.all([this.getUsersInfo(), this.getCardList()]);
