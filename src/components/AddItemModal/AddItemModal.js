@@ -26,7 +26,6 @@ function AddItemModal({ isOpen, onAddItem, onClose }) {
     // prevent default behavior
     evt.preventDefault();
     // call onAddItem with appropriate arguments
-    console.log({ name, link, weather });
     onAddItem({ name, link, weather });
   };
 

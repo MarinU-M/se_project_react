@@ -6,7 +6,6 @@ import "./ItemModal.css";
 
 function ItemModal({ selectedCard, onClose, onDelete }) {
   const handleDeleteSubmit = () => onDelete(selectedCard);
-  console.log(ItemModal);
   return (
     <div className={`modal modal_type_item`} onClick={onClose}>
       <div className="modal__content" onClick={(evt) => evt.stopPropagation()}>

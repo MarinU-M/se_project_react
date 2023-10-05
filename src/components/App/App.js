@@ -71,7 +71,7 @@ function App() {
   // delete clothing items
   const handleDeleteItem = (selectedItem) => {
     deleteClothingItem(selectedItem._id)
-      .then((selectedItem) => {
+      .then(() => {
         const updatedClothingItems = clothingItems.filter((item) => {
           return item._id !== selectedItem._id;
         });
