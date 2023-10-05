@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-// import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
@@ -53,7 +52,7 @@ function App() {
   };
 
   // switch fahrenheit or celcius
-  const handleToggleSwitch = () => {
+  const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
@@ -123,7 +122,7 @@ function App() {
   return (
     <div className="app">
       <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitch }}
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <Header address={address} onClickModal={handleOpenModal} />
         <Switch>
