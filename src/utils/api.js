@@ -49,4 +49,9 @@ const deleteClothingItem = async (itemId) => {
   return checkServerResponse(res);
 };
 
-export { getClothingItems, addNewClothes, deleteClothingItem };
+export {
+  checkServerResponse,
+  getClothingItems,
+  addNewClothes,
+  deleteClothingItem,
+};

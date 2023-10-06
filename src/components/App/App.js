@@ -82,6 +82,7 @@ function App() {
 
   // close modal by pressing esc
   useEffect(() => {
+    if (!activeModal) return;
     const handleEscClose = (evt) => {
       if (evt.key === "Escape") {
         handleCloseModal();
@@ -91,7 +92,7 @@ function App() {
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
-  });
+  }, [activeModal]);
 
   // set weather
   useEffect(() => {

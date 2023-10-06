@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({ isOpen, onAddItem, onClose }) {
@@ -8,6 +8,11 @@ function AddItemModal({ isOpen, onAddItem, onClose }) {
   const [weather, setweather] = useState("");
 
   // use a useEffect hook to reset the input field state to empty strings when
+  useEffect(() => {
+    setName("");
+    setLink("");
+  }, [isOpen]);
+
   // the modal is opened
   const handleNameChange = (evt) => {
     setName(evt.target.value);

@@ -12,7 +12,7 @@ function Main({ weatherTemp, type, day, onSelectedCard, clothingItems }) {
   const weatherType = useMemo(() => {
     if (weatherTemp.F >= 86) {
       return "hot";
-    } else if (weatherTemp.F >= 66 && weatherTemp <= 85) {
+    } else if (weatherTemp.F >= 66 && weatherTemp.F <= 85) {
       return "warm";
     } else if (weatherTemp.F <= 65) {
       return "cold";
