@@ -17,6 +17,7 @@ This project is made to help you to decide daily outfit according to today's tem
 - [Link to the project on Figma](https://www.figma.com/file/JELwiE1GnlYDgJTcphpJOH/Sprint-11%3A-WTWR)
 
 **Images**
+
 WTWR home page
 ![image](https://github.com/MarinU-M/se_project_react/assets/133256866/31acad3f-908a-425a-b84b-0795aca3bb53)
 
