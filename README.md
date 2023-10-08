@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Project 4: WTWR
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Overview
 
-## Available Scripts
+- Intro
+- Figma
+- Images
+- Github page (06/07 added)
+- Technologies (06/18 updated)
 
-In the project directory, you can run:
+**Intro**
 
-### `npm start`
+This project is made to help you to decide daily outfit according to today's temperature. Clothes cards are fetched from a server via API, and weather information is fetched from [OpenWeather](https://openweathermap.org/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Figma**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [Link to the project on Figma](https://www.figma.com/file/JELwiE1GnlYDgJTcphpJOH/Sprint-11%3A-WTWR)
 
-### `npm test`
+**Images**
+WTWR home page
+![image](https://github.com/MarinU-M/se_project_react/assets/133256866/31acad3f-908a-425a-b84b-0795aca3bb53)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The temperature unit can be switched to Celcius/Fahrenheit.
+![image](https://github.com/MarinU-M/se_project_react/assets/133256866/9aebc075-ab5f-4554-863e-4e1699da62ce)
 
-### `npm run build`
+When a user click the account name, the screen will be transitioned to the account page with all clothes cards. They can go back to the home page anytime they want by clicking WTWR logo.
+![image](https://github.com/MarinU-M/se_project_react/assets/133256866/09707ac3-3baa-42fa-a755-3cdbaeca5429)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A user can add new clothes to this app via this Add Garment modal by clicking "+ Add clothes" in header or "+ Add new" in their profile page.
+![image](https://github.com/MarinU-M/se_project_react/assets/133256866/e26f4f71-8008-4a41-af44-4463f7ce3ae4)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+When a user click a clothes card, the detail will be popped up.
+![image](https://github.com/MarinU-M/se_project_react/assets/133256866/4230bae3-8001-4103-8a9d-8497c128dead)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The card can be easily deleted.
+![image](https://github.com/MarinU-M/se_project_react/assets/133256866/613f013c-1193-446c-902f-163f1215be36)
 
-### `npm run eject`
+**Github page**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [To be deployed](https://marinu-m.github.io/se_project_react/)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Technologies**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- BEM method
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- flexbox
+- grid
+- hover state
+- media query, responsive design
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- JavaScript/react
+  - Data fetch from API
+  - Screen transition using Router
+  - Monitoring states using hooks
