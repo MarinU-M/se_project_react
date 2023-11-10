@@ -3,13 +3,16 @@ import logo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const currentDate = new Date().toLocaleString("default", {
-  month: "long",
-  day: "numeric",
-});
+function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
+  const currentUser = useContext(CurrentUserContext);
 
-function Header({ address, onClickModal }) {
   return (
     <header className="header">
       <div className="header__logo">
@@ -22,13 +25,30 @@ function Header({ address, onClickModal }) {
       </div>
       <div className="header__profile">
         <ToggleSwitch />
-        <button className="header__addBtn" onClick={onClickModal}>
-          + Add clothes
-        </button>
-        <Link to="/profile" className="header__name">
-          Name
-        </Link>
-        <img src={avatar} alt="avatar" className="header__avatar" />
+        {loggedIn ? (
+          <>
+            <button className="header__addBtn" onClick={onClickModal}>
+              + Add clothes
+            </button>
+            <Link to="/profile" className="header__name">
+              {currentUser.name}
+            </Link>
+            <img
+              src={currentUser.avatar}
+              alt="user avatar icon"
+              className="header__avatar"
+            />
+          </>
+        ) : (
+          <>
+            <button className="header__addBtn" onClick={onSignUp}>
+              Sign Up
+            </button>
+            <button className="header__addBtn" onClick={onLogIn}>
+              Log In
+            </button>
+          </>
+        )}
       </div>
     </header>
   );

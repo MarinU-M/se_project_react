@@ -2,7 +2,13 @@ import "./RegisterModal.css";
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ isOpen, onClose, onAddItem }) {
+function RegisterModal({
+  isOpen,
+  onClose,
+  onSubmit,
+  isLoading,
+  onAltOptionBtn,
+}) {
   // declare state for each input field
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +33,7 @@ function RegisterModal({ isOpen, onClose, onAddItem }) {
   };
 
   const handleNameChange = (evt) => {
-    setweather(evt.target.value);
+    setName(evt.target.value);
   };
 
   const handleLinkChange = (evt) => {
@@ -39,8 +45,7 @@ function RegisterModal({ isOpen, onClose, onAddItem }) {
   const handleSubmit = (evt) => {
     // prevent default behavior
     evt.preventDefault();
-    // call onAddItem with appropriate arguments
-    onAddItem({ email, password, name, link });
+    onSubmit({ email, password, name, link });
   };
   return (
     <ModalWithForm
@@ -48,8 +53,10 @@ function RegisterModal({ isOpen, onClose, onAddItem }) {
       name="sign-up"
       onClose={onClose}
       isOpen={isOpen}
-      btnText="Next"
+      btnText={isLoading ? "Next..." : "Next"}
       onSubmit={handleSubmit}
+      altOptionBtn="or Log In"
+      onAltOptionBtn={onAltOptionBtn}
     >
       <label className="modal__label">
         Email*

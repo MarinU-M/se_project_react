@@ -54,13 +54,17 @@
 
 .modal__form {
   margin: 25px;
-
   display: flex;
   flex-direction: column;
 }
 
+.modal__btns {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 25px;
+  gap: 16px;
+}
 .modal__submit {
-  margin: 25px auto 0 0;
   font-family: "CabinetGrotesk-Bold";
   font-size: 16px;
   line-height: 20px;
@@ -76,4 +80,22 @@
 
 .modal__submit:hover {
   opacity: 60%;
+}
+
+.modal__alt-btn {
+  font-family: "CabinetGrotesk-Bold";
+  font-size: 16px;
+  line-height: 20px;
+  color: #000;
+  background: transparent center no-repeat;
+  border: none;
+  outline: none;
+  transition: opacity linear 0.1s 0.1s;
+  opacity: 60%;
+  width: fit-content;
+  align-self: center;
+}
+
+.modal__alt-btn:hover {
+  opacity: 100%;
 }

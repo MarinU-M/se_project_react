@@ -2,7 +2,7 @@ import "./LoginModal.css";
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({ isOpen, onClose, onAddItem }) {
+function LoginModal({ isOpen, onClose, onAddItem, onAltOptionBtn }) {
   // declare state for each input field
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +38,8 @@ function LoginModal({ isOpen, onClose, onAddItem }) {
       isOpen={isOpen}
       btnText="Log in"
       onSubmit={handleSubmit}
+      altOptionBtn="or Register"
+      onAltOptionBtn={onAltOptionBtn}
     >
       <label className="modal__label">
         Emai
