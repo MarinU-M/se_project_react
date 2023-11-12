@@ -29,9 +29,11 @@ const getClothingItems = () => {
 //   }
 
 const addNewClothes = async (item) => {
+  const token = localStorage.getItem("jwt");
   const res = await fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: headers,
+    authorization: `Bearer ${token}`,
     body: JSON.stringify({
       name: item.name,
       link: item.link,
@@ -42,9 +44,11 @@ const addNewClothes = async (item) => {
 };
 
 const deleteClothingItem = async (itemId) => {
+  const token = localStorage.getItem("jwt");
   const res = await fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers: headers,
+    authorization: `Bearer ${token}`,
   });
   return checkServerResponse(res);
 };

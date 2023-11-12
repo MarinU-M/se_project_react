@@ -2,7 +2,7 @@ import "./LoginModal.css";
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({ isOpen, onClose, onAddItem, onAltOptionBtn }) {
+function LoginModal({ isOpen, onClose, onSubmit, onAltOptionBtn }) {
   // declare state for each input field
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ function LoginModal({ isOpen, onClose, onAddItem, onAltOptionBtn }) {
     // prevent default behavior
     evt.preventDefault();
     // call onAddItem with appropriate arguments
-    onAddItem({ email, password });
+    onSubmit({ email, password });
   };
   return (
     <ModalWithForm

@@ -24,7 +24,7 @@ function ModalWithForm({
               {btnText}
             </button>
             {altOptionBtn && (
-              <button className="modal__alt-btn" onclick={onAltOptionBtn}>
+              <button className="modal__alt-btn" onClick={onAltOptionBtn}>
                 {altOptionBtn}
               </button>
             )}

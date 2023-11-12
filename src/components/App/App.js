@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -11,9 +11,9 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { signIn, signUp } from "../../utils/auth";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { signIn, signUp, checkToken } from "../../utils/auth";
 import {
   getClothingItems,
   addNewClothes,
@@ -39,6 +39,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const history = useHistory();
 
   // open register modal
   const handleRegisterModal = () => {
@@ -83,24 +84,32 @@ function App() {
   // signup user
   const handleSignUp = ({ name, avatar, email, password }) => {
     const newUser = () => {
-      signUp({ name, avatar, email, password }).then((user) => {
+      return signUp({ name, avatar, email, password }).then((user) => {
+        const { email, password } = user;
+        console.log(email, password);
         handleLogin({ email, password });
         setLoggedIn(true);
         setCurrentUser(user);
         localStorage.setItem("jwt", user.token);
       });
-      handleSubmit(newUser);
     };
+    handleSubmit(newUser);
   };
 
   // login user
   const handleLogin = ({ email, password }) => {
-    signIn({ email, password })
-      .then((user) => {
-        setCurrentUser(user);
-        setLoggedIn(true);
-      })
-      .catch((err) => console.error(err));
+    const loginUser = () => {
+      return signIn({ email, password }).then((res) => {
+        const token = res.token;
+        localStorage.setItem("jwt", token);
+        checkToken(token).then((user) => {
+          setCurrentUser(user);
+          setLoggedIn(true);
+          history.push("/profile");
+        });
+      });
+    };
+    handleSubmit(loginUser);
   };
 
   // switch fahrenheit or celcius
@@ -131,6 +140,18 @@ function App() {
       })
       .catch((err) => console.error(`deleteItem: ${err}`));
   };
+
+  // check if there is token on user client
+  // useEffect(() => {
+  //   const jwt = localStorage.getItem("jwt");
+  //   if (jwt) {
+  //     return checkToken(jwt).then((user) => {
+  //       console.log(user);
+  //       setLoggedIn(true);
+  //       setCurrentUser(user);
+  //     });
+  //   }
+  // });
 
   // close modal by pressing esc
   useEffect(() => {

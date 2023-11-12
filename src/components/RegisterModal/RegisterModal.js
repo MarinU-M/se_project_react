@@ -13,14 +13,14 @@ function RegisterModal({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [link, setLink] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   // use a useEffect hook to reset the input field state to empty strings when
   useEffect(() => {
     setEmail("");
     setPassword("");
     setName("");
-    setLink("");
+    setAvatar("");
   }, [isOpen]);
 
   // the modal is opened
@@ -36,8 +36,8 @@ function RegisterModal({
     setName(evt.target.value);
   };
 
-  const handleLinkChange = (evt) => {
-    setLink(evt.target.value);
+  const handleAvatarChange = (evt) => {
+    setAvatar(evt.target.value);
   };
 
   // create onChange handlers corresponding to each state variable
@@ -45,7 +45,7 @@ function RegisterModal({
   const handleSubmit = (evt) => {
     // prevent default behavior
     evt.preventDefault();
-    onSubmit({ email, password, name, link });
+    onSubmit({ email, password, name, avatar });
   };
   return (
     <ModalWithForm
@@ -101,11 +101,11 @@ function RegisterModal({
         <input
           className="modal__input"
           type="url"
-          name="link"
+          name="avatar"
           minLength="1"
           placeholder="Avatar URL"
-          value={link}
-          onChange={handleLinkChange}
+          value={avatar}
+          onChange={handleAvatarChange}
         />
       </label>
     </ModalWithForm>

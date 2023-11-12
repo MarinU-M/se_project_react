@@ -1,6 +1,6 @@
 import "./Header.css";
 import logo from "../../images/logo.svg";
-import avatar from "../../images/avatar.svg";
+// import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -12,6 +12,13 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
     day: "numeric",
   });
   const currentUser = useContext(CurrentUserContext);
+  // const currentcontext = useContext(CurrentUserContext);
+  // const currentUser = currentcontext.user;
+  const currentAvatar = currentUser.avatar;
+  const userName = currentUser.name;
+
+  console.log(currentUser);
+  console.log(currentAvatar);
 
   return (
     <header className="header">
@@ -33,11 +40,15 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
             <Link to="/profile" className="header__name">
               {currentUser.name}
             </Link>
-            <img
-              src={currentUser.avatar}
-              alt="user avatar icon"
-              className="header__avatar"
-            />
+            {currentAvatar ? (
+              <img
+                src={currentAvatar}
+                alt="user avatar icon"
+                className="header__avatar"
+              />
+            ) : (
+              <p>{currentUser.name[0].toUpperCase()}</p>
+            )}
           </>
         ) : (
           <>
