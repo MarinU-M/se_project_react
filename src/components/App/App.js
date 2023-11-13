@@ -88,9 +88,6 @@ function App() {
         const { email, password } = user;
         console.log(email, password);
         handleLogin({ email, password });
-        setLoggedIn(true);
-        setCurrentUser(user);
-        localStorage.setItem("jwt", user.token);
       });
     };
     handleSubmit(newUser);
@@ -102,11 +99,16 @@ function App() {
       return signIn({ email, password }).then((res) => {
         const token = res.token;
         localStorage.setItem("jwt", token);
-        checkToken(token).then((user) => {
-          setCurrentUser(user);
-          setLoggedIn(true);
-          history.push("/profile");
-        });
+        checkToken(token)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data);
+            setCurrentUser(data);
+            setLoggedIn(true);
+            history.push("/profile");
+          });
       });
     };
     handleSubmit(loginUser);

@@ -1,10 +1,18 @@
-// ItemModal renders the item image and title. The component accepts the following props:
-
-// onClose (works the same way as the ModalWithForm)
-// The item card data that you need to render
 import "./ItemModal.css";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ItemModal({ selectedCard, onClose, onDelete }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  // Checking if the current user is the owner of the current clothing item
+  const isOwn = selectedCard.owner._id === currentUser._id;
+
+  // Creating a variable which you'll then set in `className` for the delete button
+  const itemDeleteButtonClassName = `modal__deleteBtn ${
+    isOwn ? "modal__deleteBtn_visible" : "modal__deleteBtn_hidden"
+  }`;
+
   const handleDeleteSubmit = () => onDelete(selectedCard);
   return (
     <div className={`modal modal_type_item`} onClick={onClose}>
@@ -25,7 +33,7 @@ function ItemModal({ selectedCard, onClose, onDelete }) {
             <span>Weather: {selectedCard.weather}</span>
           </p>
           <button
-            className={`modal__btn modal__deleteBtn`}
+            className={itemDeleteButtonClassName}
             onClick={handleDeleteSubmit}
           >
             Delete item

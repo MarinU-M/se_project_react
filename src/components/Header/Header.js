@@ -1,6 +1,6 @@
 import "./Header.css";
 import logo from "../../images/logo.svg";
-// import avatar from "../../images/avatar.svg";
+import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -13,12 +13,13 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
   });
   const currentUser = useContext(CurrentUserContext);
   // const currentcontext = useContext(CurrentUserContext);
-  // const currentUser = currentcontext.user;
-  const currentAvatar = currentUser.avatar;
-  const userName = currentUser.name;
+  const name = currentUser.data.name;
+  // const avatar = currentUser.data.avatar;
+  // const currentAvatar = currentUser?.avatar;
 
+  // console.log(currentcontext);
   console.log(currentUser);
-  console.log(currentAvatar);
+  console.log(name);
 
   return (
     <header className="header">
@@ -38,17 +39,18 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
               + Add clothes
             </button>
             <Link to="/profile" className="header__name">
-              {currentUser.name}
+              {/* {name} */}
+              name
             </Link>
-            {currentAvatar ? (
-              <img
-                src={currentAvatar}
-                alt="user avatar icon"
-                className="header__avatar"
-              />
-            ) : (
-              <p>{currentUser.name[0].toUpperCase()}</p>
-            )}
+            {/* {avatar ? ( */}
+            <img
+              src={avatar}
+              alt="user avatar icon"
+              className="header__avatar"
+            />
+            {/* ) : ( */}
+            {/* <p>{name[0].toUpperCase()}</p> */}
+            {/* )} */}
           </>
         ) : (
           <>

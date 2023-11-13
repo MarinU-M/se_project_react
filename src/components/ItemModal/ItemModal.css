@@ -28,6 +28,14 @@
   color: #ff4d00;
 }
 
+.modal__deleteBtn_visible {
+  visibility: visible;
+}
+
+.modal__deleteBtn_hidden {
+  visibility: hidden;
+}
+
 .modal__btn {
   background: transparent center no-repeat;
   border: none;
