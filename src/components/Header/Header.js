@@ -12,9 +12,8 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
     day: "numeric",
   });
   const currentUser = useContext(CurrentUserContext);
-  // const currentcontext = useContext(CurrentUserContext);
-  const name = currentUser.data.name;
-  // const avatar = currentUser.data.avatar;
+  const name = currentUser.data?.name;
+  const avatar = currentUser.data?.avatar;
   // const currentAvatar = currentUser?.avatar;
 
   // console.log(currentcontext);
@@ -39,18 +38,17 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
               + Add clothes
             </button>
             <Link to="/profile" className="header__name">
-              {/* {name} */}
-              name
+              {name}
             </Link>
-            {/* {avatar ? ( */}
-            <img
-              src={avatar}
-              alt="user avatar icon"
-              className="header__avatar"
-            />
-            {/* ) : ( */}
-            {/* <p>{name[0].toUpperCase()}</p> */}
-            {/* )} */}
+            {avatar ? (
+              <img
+                src={avatar}
+                alt="user avatar icon"
+                className="header__avatar"
+              />
+            ) : (
+              <p>{name[0].toUpperCase()}</p>
+            )}
           </>
         ) : (
           <>
