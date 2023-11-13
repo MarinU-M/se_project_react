@@ -177,6 +177,7 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       return checkToken(jwt)
+        .then((res) => res.json())
         .then((user) => {
           console.log(user);
           setLoggedIn(true);
