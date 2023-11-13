@@ -1,34 +1,37 @@
 import { baseUrl } from "./constants";
 import { checkServerResponse } from "./api";
 
-const signUp = ({ name, avatar, email, password }) => {
-  return fetch(`${baseUrl}/signup`, {
+const signUp = async ({ name, avatar, email, password }) => {
+  const res = await fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then(checkServerResponse);
+  });
+  return checkServerResponse(res);
 };
 
-const signIn = ({ email, password }) => {
-  return fetch(`${baseUrl}/signin`, {
+const signIn = async ({ email, password }) => {
+  const res = await fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then(checkServerResponse);
+  });
+  return checkServerResponse(res);
 };
 
-const checkToken = (token) => {
-  return fetch(`${baseUrl}/users/me`, {
+const checkToken = async (token) => {
+  const res = await fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
   });
+  return checkServerResponse(res);
 };
 
 export { signUp, signIn, checkToken };
