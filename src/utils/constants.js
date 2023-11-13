@@ -12,9 +12,6 @@ import nightStorm from "../images/night/nightStorm.svg";
 import nightSnow from "../images/night/nightSnow.svg";
 import nightFog from "../images/night/nightFog.svg";
 
-const headers = {
-  "Content-Type": "application/json",
-};
 const baseUrl = "http://localhost:3001";
 
 const weatherImgs = [
@@ -32,7 +29,7 @@ const weatherImgs = [
   { url: nightFog, day: false, type: "fog" },
 ];
 
-export { baseUrl, headers, weatherImgs };
+export { baseUrl, weatherImgs };
 
 // const defaultClothingItems = [
 //   {

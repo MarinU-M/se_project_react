@@ -2,7 +2,7 @@ import "./LoginModal.css";
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({ isOpen, onClose, onSubmit, onAltOptionBtn }) {
+function LoginModal({ isOpen, onClose, onSubmit, onAltOptionBtn, isLoading }) {
   // declare state for each input field
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ function LoginModal({ isOpen, onClose, onSubmit, onAltOptionBtn }) {
       name="log-in"
       onClose={onClose}
       isOpen={isOpen}
-      btnText="Log in"
+      btnText={isLoading ? "Logging in..." : "Log in"}
       onSubmit={handleSubmit}
       altOptionBtn="or Register"
       onAltOptionBtn={onAltOptionBtn}

@@ -6,8 +6,11 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 // import { defaultClothingItems } from "../../utils/constants";
 
 function ClothesSection({ onSelectedCard, clothingItems, onClickModal }) {
-  const currentUser = useContext(CurrentUserContext);
-
+  const currentContext = useContext(CurrentUserContext);
+  const currentUserId = currentContext.data?._id;
+  const filteredItems = clothingItems.filter(
+    (item) => item.owner === currentUserId
+  );
   return (
     <div className="clothes-section">
       <div className="clothes-section__title">
@@ -17,7 +20,7 @@ function ClothesSection({ onSelectedCard, clothingItems, onClickModal }) {
         </button>
       </div>
       <ul className="clothes-section__card-list">
-        {clothingItems.map((item) => (
+        {filteredItems.map((item) => (
           <ItemCard
             key={item._id}
             item={item}

@@ -9,6 +9,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import ChangeProfileModal from "../ChangeProfileModal/ChangeProfileModal";
 import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
@@ -18,6 +19,7 @@ import {
   getClothingItems,
   addNewClothes,
   deleteClothingItem,
+  changeUserProfile,
 } from "../../utils/api";
 import {
   getWeatherForecast,
@@ -70,6 +72,10 @@ function App() {
     setActiveModal("confirm");
   };
 
+  // handle profile change modal
+  const handleChangeProfileModal = () => {
+    setActiveModal("change");
+  };
   // submit user info
   const handleSubmit = (req) => {
     setIsLoading(true);
@@ -104,7 +110,6 @@ function App() {
             return res.json();
           })
           .then((data) => {
-            console.log(data);
             setCurrentUser(data);
             setLoggedIn(true);
             history.push("/profile");
@@ -112,6 +117,30 @@ function App() {
       });
     };
     handleSubmit(loginUser);
+  };
+
+  // update user profile
+  const handleProfileChange = ({ name, avatar }) => {
+    setIsLoading(true);
+    const updateUser = () => {
+      return changeUserProfile({ name, avatar })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setCurrentUser(data);
+          handleCloseModal();
+        });
+    };
+    handleSubmit(updateUser);
+  };
+
+  // log out user
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setCurrentUser({});
+    localStorage.removeItem("jwt");
+    history.push("/");
   };
 
   // switch fahrenheit or celcius
@@ -144,16 +173,20 @@ function App() {
   };
 
   // check if there is token on user client
-  // useEffect(() => {
-  //   const jwt = localStorage.getItem("jwt");
-  //   if (jwt) {
-  //     return checkToken(jwt).then((user) => {
-  //       console.log(user);
-  //       setLoggedIn(true);
-  //       setCurrentUser(user);
-  //     });
-  //   }
-  // });
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      return checkToken(jwt)
+        .then((user) => {
+          console.log(user);
+          setLoggedIn(true);
+          setCurrentUser(user);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      setLoggedIn(false);
+    }
+  }, [loggedIn, history]);
 
   // close modal by pressing esc
   useEffect(() => {
@@ -223,6 +256,8 @@ function App() {
                 onSelectedCard={handleSelectedCard}
                 clothingItems={clothingItems}
                 onClickModal={handleOpenModal}
+                onClickChangeProfile={handleChangeProfileModal}
+                onLogOut={handleLogout}
               />
             </ProtectedRoute>
           </Switch>
@@ -265,6 +300,15 @@ function App() {
               onClose={handleCloseModal}
               onSubmit={handleLogin}
               onAltOptionBtn={handleRegisterModal}
+              isLoading={isLoading}
+            />
+          )}
+          {activeModal === "change" && (
+            <ChangeProfileModal
+              isOpen={activeModal === "change"}
+              onClose={handleCloseModal}
+              onSubmit={handleProfileChange}
+              isLoading={isLoading}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>

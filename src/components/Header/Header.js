@@ -1,6 +1,6 @@
 import "./Header.css";
 import logo from "../../images/logo.svg";
-import avatar from "../../images/avatar.svg";
+// import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -12,13 +12,8 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
     day: "numeric",
   });
   const currentUser = useContext(CurrentUserContext);
-  const name = currentUser.data?.name;
-  const avatar = currentUser.data?.avatar;
-  // const currentAvatar = currentUser?.avatar;
-
-  // console.log(currentcontext);
-  console.log(currentUser);
-  console.log(name);
+  const name = currentUser?.name;
+  const avatar = currentUser?.avatar;
 
   return (
     <header className="header">
@@ -47,7 +42,9 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
                 className="header__avatar"
               />
             ) : (
-              <p>{name[0].toUpperCase()}</p>
+              <div className="header__avatar">
+                <p className="header__place-holder">{name[0].toUpperCase()}</p>
+              </div>
             )}
           </>
         ) : (
@@ -66,9 +63,3 @@ function Header({ address, onClickModal, onSignUp, onLogIn, loggedIn }) {
 }
 
 export default Header;
-
-// A logo
-
-// The current location (see Section 4 for details)
-// An “Add Clothes” button that opens ModalWithForm
-// The user’s name and avatar (both are hardcoded at this point)

@@ -1,4 +1,4 @@
-import { baseUrl, headers } from "./constants";
+import { baseUrl } from "./constants";
 
 const checkServerResponse = (res) => {
   if (res.ok) {
@@ -12,7 +12,9 @@ const checkServerResponse = (res) => {
 const getClothingItems = () => {
   return fetch(`${baseUrl}/items`, {
     method: "GET",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then(checkServerResponse);
 };
 
@@ -32,8 +34,10 @@ const addNewClothes = async (item) => {
   const token = localStorage.getItem("jwt");
   const res = await fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: headers,
-    authorization: `Bearer ${token}`,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({
       name: item.name,
       link: item.link,
@@ -47,8 +51,23 @@ const deleteClothingItem = async (itemId) => {
   const token = localStorage.getItem("jwt");
   const res = await fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
-    headers: headers,
-    authorization: `Bearer ${token}`,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+  return checkServerResponse(res);
+};
+
+const changeUserProfile = async ({ name, avatar }) => {
+  const token = localStorage.getItem("jwt");
+  const res = await fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
   });
   return checkServerResponse(res);
 };
@@ -58,4 +77,5 @@ export {
   getClothingItems,
   addNewClothes,
   deleteClothingItem,
+  changeUserProfile,
 };
