@@ -6,11 +6,7 @@ import { useContext } from "react";
 
 function ItemCard({ item, onSelectedCard, onCardLike, isLoggedIn }) {
   const currentUser = useContext(CurrentUserContext);
-  // Check if the item was liked by the current user
-  // The likes array should be an array of ids
   const isLiked = item.likes.some((id) => id === currentUser._id);
-
-  // Create a variable which you then set in `className` for the like button
   const itemLikeBtnClassName = `item__like ${
     !isLoggedIn && "item__like_hidden"
   }`;
@@ -20,7 +16,7 @@ function ItemCard({ item, onSelectedCard, onCardLike, isLoggedIn }) {
     <li className="item__card">
       <img
         className="item__image"
-        src={item.link}
+        src={item.imageUrl}
         alt={item.name}
         onClick={() => onSelectedCard(item)}
       />

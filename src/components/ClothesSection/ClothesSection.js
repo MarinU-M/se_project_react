@@ -5,9 +5,15 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 // import { defaultClothingItems } from "../../utils/constants";
 
-function ClothesSection({ onSelectedCard, clothingItems, onClickModal }) {
+function ClothesSection({
+  onSelectedCard,
+  clothingItems,
+  onClickModal,
+  onCardLike,
+  isLoggedIn,
+}) {
   const currentContext = useContext(CurrentUserContext);
-  const currentUserId = currentContext.data?._id;
+  const currentUserId = currentContext?._id;
   const filteredItems = clothingItems.filter(
     (item) => item.owner === currentUserId
   );
@@ -25,6 +31,8 @@ function ClothesSection({ onSelectedCard, clothingItems, onClickModal }) {
             key={item._id}
             item={item}
             onSelectedCard={onSelectedCard}
+            onCardLike={onCardLike}
+            isLoggedIn={isLoggedIn}
           />
         ))}
       </ul>

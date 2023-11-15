@@ -26,6 +26,18 @@
   font-family: "CabinetGrotesk-Bold";
   font-size: 20px;
   color: #ff4d00;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: opacity linear 0.1s 0.1s;
+  cursor: pointer;
+  padding: 0;
+  height: fit-content;
+  width: fit-content;
+}
+
+.modal__deleteBtn:hover {
+  opacity: 60%;
 }
 
 .modal__deleteBtn_visible {

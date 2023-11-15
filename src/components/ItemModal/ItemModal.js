@@ -6,14 +6,13 @@ function ItemModal({ selectedCard, onClose, onDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
   // Checking if the current user is the owner of the current clothing item
-  const isOwn = selectedCard.owner._id === currentUser._id;
-
+  const isOwn = selectedCard.owner === currentUser._id;
+  console.log(isOwn);
   // Creating a variable which you'll then set in `className` for the delete button
   const itemDeleteButtonClassName = `modal__deleteBtn ${
     isOwn ? "modal__deleteBtn_visible" : "modal__deleteBtn_hidden"
   }`;
 
-  const handleDeleteSubmit = () => onDelete(selectedCard);
   return (
     <div className={`modal modal_type_item`} onClick={onClose}>
       <div className="modal__content" onClick={(evt) => evt.stopPropagation()}>
@@ -24,7 +23,7 @@ function ItemModal({ selectedCard, onClose, onDelete }) {
         ></button>
         <img
           className="modal__image"
-          src={selectedCard.link}
+          src={selectedCard.imageUrl}
           alt={selectedCard.name}
         />
         <div className="modal__text">
@@ -34,7 +33,7 @@ function ItemModal({ selectedCard, onClose, onDelete }) {
           </p>
           <button
             className={itemDeleteButtonClassName}
-            onClick={handleDeleteSubmit}
+            onClick={() => onDelete(selectedCard)}
           >
             Delete item
           </button>

@@ -123,9 +123,10 @@ function App() {
 
   // update user profile
   const handleProfileChange = ({ name, avatar }) => {
-    debugger;
+    const token = localStorage.getItem("jwt");
+    // debugger;
     const updateUser = () => {
-      return changeUserProfile({ name, avatar }).then((data) => {
+      return changeUserProfile(name, avatar, token).then((data) => {
         console.log(data);
         setCurrentUser(data);
       });
@@ -149,7 +150,8 @@ function App() {
 
   // add clothing item
   const handleAddItem = (item) => {
-    addNewClothes(item)
+    const token = localStorage.getItem("jwt");
+    addNewClothes(item, token)
       .then((item) => {
         setClothingItems([item, ...clothingItems]);
         handleCloseModal();
@@ -159,7 +161,8 @@ function App() {
 
   // delete clothing items
   const handleDeleteItem = (selectedItem) => {
-    deleteClothingItem(selectedItem._id)
+    const token = localStorage.getItem("jwt");
+    deleteClothingItem(selectedItem._id, token)
       .then(() => {
         const updatedClothingItems = clothingItems.filter((item) => {
           return item._id !== selectedItem._id;
@@ -171,27 +174,31 @@ function App() {
   };
 
   // handle like on item card
-  const handleLikeClick = ({ itemId, isLiked, user }) => {
+  const handleLikeClick = ({ _id, likes, owner }) => {
+    console.log(likes);
+    const token = localStorage.getItem("jwt");
     // Check if this card is now liked
-    isLiked
-      ? // if so, send a request to add the user's id to the card's likes array
-        // the first argument is the card's id
-        addCardLike(itemId, user)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((c) => (c._id === itemId ? updatedCard : c))
-            );
-          })
-          .catch((err) => console.log(err))
-      : // if not, send a request to remove the user's id from the card's likes array
-        // the first argument is the card's id
-        removeCardLike(itemId, user)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((c) => (c._id === itemId ? updatedCard : c))
-            );
-          })
-          .catch((err) => console.log(err));
+    if (likes) {
+      // if so, send a request to add the user's id to the card's likes array
+      // the first argument is the card's id
+      addCardLike(_id, owner, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((c) => (c._id === _id ? updatedCard : c))
+          );
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // if not, send a request to remove the user's id from the card's likes array
+      // the first argument is the card's id
+      removeCardLike(_id, owner, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((c) => (c._id === _id ? updatedCard : c))
+          );
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   // check if there is token on user client
@@ -281,6 +288,8 @@ function App() {
                 onClickModal={handleOpenModal}
                 onClickChangeProfile={handleChangeProfileModal}
                 onLogOut={handleLogout}
+                onCardLike={handleLikeClick}
+                isLoggedIn={loggedIn}
               />
             </ProtectedRoute>
           </Switch>

@@ -9,6 +9,8 @@ function Profile({
   onClickModal,
   onLogOut,
   onClickChangeProfile,
+  onCardLike,
+  isLoggedIn,
 }) {
   return (
     <div className="profile">
@@ -20,6 +22,8 @@ function Profile({
         onSelectedCard={onSelectedCard}
         clothingItems={clothingItems}
         onClickModal={onClickModal}
+        onCardLike={onCardLike}
+        isLoggedIn={isLoggedIn}
       />
     </div>
   );

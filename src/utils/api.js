@@ -18,8 +18,7 @@ const getClothingItems = () => {
   }).then(checkServerResponse);
 };
 
-const addNewClothes = (item) => {
-  const token = localStorage.getItem("jwt");
+const addNewClothes = (item, token) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -28,14 +27,13 @@ const addNewClothes = (item) => {
     },
     body: JSON.stringify({
       name: item.name,
-      link: item.link,
+      imageUrl: item.link,
       weather: item.weather,
     }),
   }).then(checkServerResponse);
 };
 
-const deleteClothingItem = (itemId) => {
-  const token = localStorage.getItem("jwt");
+const deleteClothingItem = (itemId, token) => {
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers: {
@@ -45,8 +43,7 @@ const deleteClothingItem = (itemId) => {
   }).then(checkServerResponse);
 };
 
-const changeUserProfile = ({ name, avatar }) => {
-  const token = localStorage.getItem("jwt");
+const changeUserProfile = (name, avatar, token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
@@ -57,27 +54,25 @@ const changeUserProfile = ({ name, avatar }) => {
   }).then(checkServerResponse);
 };
 
-const addCardLike = (itemId, user) => {
-  const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+const addCardLike = (_id, owner, token) => {
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ user }),
+    body: JSON.stringify({ owner }),
   }).then(checkServerResponse);
 };
 
-const removeCardLike = (itemId, user) => {
-  const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+const removeCardLike = (_id, owner, token) => {
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ user }),
+    body: JSON.stringify({ owner }),
   }).then(checkServerResponse);
 };
 

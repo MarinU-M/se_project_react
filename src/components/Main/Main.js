@@ -26,10 +26,10 @@ function Main({
       return "cold";
     }
   }, [weatherTemp]);
+
   const filteredItems = clothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
   });
-
   return (
     <main>
       <WeatherCard day={day} type={type} weatherTemp={temp} />

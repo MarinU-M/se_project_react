@@ -39,6 +39,7 @@ The card can be easily deleted.
 **Github page**
 
 - [To be deployed](https://marinu-m.github.io/se_project_react/)
+- [Backend of this app](https://github.com/MarinU-M/se_project_express)
 
 **Technologies**
 
