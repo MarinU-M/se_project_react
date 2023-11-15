@@ -1,11 +1,21 @@
-// the image is an interactive element, meaning that if the user clicks on it, the item modal will open.
-// Note that the item card itself doesn’t know about the modal state. Therefore, you need to pass it down from App to Main.
-// when the user clicks on the image, you need to call the state change function handleCardClick() that ItemCard receives as a prop.
-
 import "./ItemCard.css";
 import likeBtn from "../../images/likeBtn.svg";
+import Liked from "../../images/Liked.svg";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
-function ItemCard({ item, onSelectedCard }) {
+function ItemCard({ item, onSelectedCard, onCardLike, isLoggedIn }) {
+  const currentUser = useContext(CurrentUserContext);
+  // Check if the item was liked by the current user
+  // The likes array should be an array of ids
+  const isLiked = item.likes.some((id) => id === currentUser._id);
+
+  // Create a variable which you then set in `className` for the like button
+  const itemLikeBtnClassName = `item__like ${
+    !isLoggedIn && "item__like_hidden"
+  }`;
+  const itemLikeBtnSrc = `${isLiked ? Liked : likeBtn}`;
+
   return (
     <li className="item__card">
       <img
@@ -16,7 +26,12 @@ function ItemCard({ item, onSelectedCard }) {
       />
       <div className="item__label">
         <p className="item__name">{item.name}</p>
-        <img src={likeBtn} alt="like button" className="item__like" />
+        <img
+          src={itemLikeBtnSrc}
+          alt="like button"
+          className={itemLikeBtnClassName}
+          onClick={() => onCardLike(item)}
+        />
       </div>
     </li>
   );

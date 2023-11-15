@@ -47,3 +47,7 @@
 .item__like:hover {
   opacity: 60%;
 }
+
+.item__like_hidden {
+  visibility: hidden;
+}

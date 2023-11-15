@@ -20,6 +20,8 @@ import {
   addNewClothes,
   deleteClothingItem,
   changeUserProfile,
+  addCardLike,
+  removeCardLike,
 } from "../../utils/api";
 import {
   getWeatherForecast,
@@ -106,9 +108,9 @@ function App() {
         const token = res.token;
         localStorage.setItem("jwt", token);
         checkToken(token)
-          .then((res) => {
-            return res.json();
-          })
+          // .then((res) => {
+          //   return res.json();
+          // })
           .then((data) => {
             setCurrentUser(data);
             setLoggedIn(true);
@@ -121,16 +123,12 @@ function App() {
 
   // update user profile
   const handleProfileChange = ({ name, avatar }) => {
-    setIsLoading(true);
+    debugger;
     const updateUser = () => {
-      return changeUserProfile({ name, avatar })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setCurrentUser(data);
-          handleCloseModal();
-        });
+      return changeUserProfile({ name, avatar }).then((data) => {
+        console.log(data);
+        setCurrentUser(data);
+      });
     };
     handleSubmit(updateUser);
   };
@@ -172,14 +170,36 @@ function App() {
       .catch((err) => console.error(`deleteItem: ${err}`));
   };
 
+  // handle like on item card
+  const handleLikeClick = ({ itemId, isLiked, user }) => {
+    // Check if this card is now liked
+    isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        // the first argument is the card's id
+        addCardLike(itemId, user)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === itemId ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        // the first argument is the card's id
+        removeCardLike(itemId, user)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === itemId ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   // check if there is token on user client
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      return checkToken(jwt)
-        .then((res) => res.json())
+      checkToken(jwt)
         .then((user) => {
-          console.log(user);
           setLoggedIn(true);
           setCurrentUser(user);
         })
@@ -250,6 +270,8 @@ function App() {
                 day={time}
                 onSelectedCard={handleSelectedCard}
                 clothingItems={clothingItems}
+                onCardLike={handleLikeClick}
+                isLoggedIn={loggedIn}
               />
             </Route>
             <ProtectedRoute path="/profile" loggedIn={loggedIn}>

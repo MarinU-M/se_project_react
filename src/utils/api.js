@@ -18,21 +18,9 @@ const getClothingItems = () => {
   }).then(checkServerResponse);
 };
 
-// const getClothingItems = async () => {
-//   const res = await fetch(`${baseUrl}/items`, {
-//     method: "GET",
-//     headers: headers,
-//   });
-//   return checkServerResponse(res);
-// };
-
-//   getAPIInfo() {
-//     return Promise.all([this.getUsersInfo(), this.getCardList()]);
-//   }
-
-const addNewClothes = async (item) => {
+const addNewClothes = (item) => {
   const token = localStorage.getItem("jwt");
-  const res = await fetch(`${baseUrl}/items`, {
+  return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -43,33 +31,54 @@ const addNewClothes = async (item) => {
       link: item.link,
       weather: item.weather,
     }),
-  });
-  return checkServerResponse(res);
+  }).then(checkServerResponse);
 };
 
-const deleteClothingItem = async (itemId) => {
+const deleteClothingItem = (itemId) => {
   const token = localStorage.getItem("jwt");
-  const res = await fetch(`${baseUrl}/items/${itemId}`, {
+  return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  });
-  return checkServerResponse(res);
+  }).then(checkServerResponse);
 };
 
-const changeUserProfile = async ({ name, avatar }) => {
+const changeUserProfile = ({ name, avatar }) => {
   const token = localStorage.getItem("jwt");
-  const res = await fetch(`${baseUrl}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
-  });
-  return checkServerResponse(res);
+  }).then(checkServerResponse);
+};
+
+const addCardLike = (itemId, user) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ user }),
+  }).then(checkServerResponse);
+};
+
+const removeCardLike = (itemId, user) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ user }),
+  }).then(checkServerResponse);
 };
 
 export {
@@ -78,4 +87,6 @@ export {
   addNewClothes,
   deleteClothingItem,
   changeUserProfile,
+  addCardLike,
+  removeCardLike,
 };

@@ -6,7 +6,6 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function SideBar({ onLogOut, onClickChangeProfile }) {
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
   const name = currentUser?.name;
   const avatar = currentUser?.avatar;
   return (

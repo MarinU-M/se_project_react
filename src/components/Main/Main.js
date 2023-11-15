@@ -5,7 +5,15 @@ import ItemCard from "../ItemCard/ItemCard";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherTemp, type, day, onSelectedCard, clothingItems }) {
+function Main({
+  weatherTemp,
+  type,
+  day,
+  onSelectedCard,
+  clothingItems,
+  onCardLike,
+  isLoggedIn,
+}) {
   // Clothing item cards, which are filtered based on the current weather.
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.[currentTemperatureUnit] || 999;
@@ -35,6 +43,8 @@ function Main({ weatherTemp, type, day, onSelectedCard, clothingItems }) {
               key={item._id}
               item={item}
               onSelectedCard={onSelectedCard}
+              onCardLike={onCardLike}
+              isLoggedIn={isLoggedIn}
             />
           ))}
         </ul>
