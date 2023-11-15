@@ -173,14 +173,15 @@ function App() {
     console.log(likes);
     const token = localStorage.getItem("jwt");
     // Check if this card is now liked
-    if (likes) {
+    if (!likes) {
+      // if(likes){
       // if so, send a request to add the user's id to the card's likes array
       // the first argument is the card's id
       addCardLike(_id, owner, token)
         .then((updatedCard) => {
-          setClothingItems((cards) =>
-            cards.map((c) => (c._id === _id ? updatedCard : c))
-          );
+          setClothingItems((cards) => {
+            return cards.map((c) => (c._id === _id ? updatedCard : c));
+          });
         })
         .catch(console.error);
     } else {
@@ -188,9 +189,9 @@ function App() {
       // the first argument is the card's id
       removeCardLike(_id, owner, token)
         .then((updatedCard) => {
-          setClothingItems((cards) =>
-            cards.map((c) => (c._id === _id ? updatedCard : c))
-          );
+          setClothingItems((cards) => {
+            return cards.map((c) => (c._id === _id ? updatedCard : c));
+          });
         })
         .catch(console.error);
     }
@@ -204,6 +205,13 @@ function App() {
         .then((user) => {
           setLoggedIn(true);
           setCurrentUser(user);
+        })
+        .then(() => {
+          if (currentUser) {
+            history.push("/profile");
+          } else {
+            history.push("/");
+          }
         })
         .catch((err) => console.error(err));
     } else {
@@ -276,7 +284,7 @@ function App() {
                 isLoggedIn={loggedIn}
               />
             </Route>
-            <ProtectedRoute path="/profile" loggedIn={loggedIn}>
+            <ProtectedRoute exact path="/profile" loggedIn={loggedIn}>
               <Profile
                 onSelectedCard={handleSelectedCard}
                 clothingItems={clothingItems}
