@@ -5,9 +5,8 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function SideBar({ onLogOut, onClickChangeProfile }) {
-  const currentUser = useContext(CurrentUserContext);
-  const name = currentUser?.name;
-  const avatar = currentUser?.avatar;
+  const { name, avatar } = useContext(CurrentUserContext);
+
   return (
     <div className="sidebar">
       <div className="sidebar__user">

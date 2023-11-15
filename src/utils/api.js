@@ -2,12 +2,15 @@ import { baseUrl } from "./constants";
 
 const checkServerResponse = (res) => {
   if (res.ok) {
-    Promise.resolve("Promise Resolved");
     return res.json();
   } else {
     return Promise.reject(`Error: ${res.status}`);
   }
 };
+
+// const request = (url, options) => {
+//   return fetch(url, options).then(checkServerResponse);
+// };
 
 const getClothingItems = () => {
   return fetch(`${baseUrl}/items`, {

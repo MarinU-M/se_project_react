@@ -83,22 +83,20 @@ function App() {
     setIsLoading(true);
     req()
       .then(handleCloseModal)
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(setIsLoading(false));
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   // signup user
   const handleSignUp = ({ name, avatar, email, password }) => {
-    const newUser = () => {
+    const addNewUser = () => {
       return signUp({ name, avatar, email, password }).then((user) => {
         const { email, password } = user;
         console.log(email, password);
         handleLogin({ email, password });
       });
     };
-    handleSubmit(newUser);
+    handleSubmit(addNewUser);
   };
 
   // login user
@@ -126,10 +124,7 @@ function App() {
     const token = localStorage.getItem("jwt");
     // debugger;
     const updateUser = () => {
-      return changeUserProfile(name, avatar, token).then((data) => {
-        console.log(data);
-        setCurrentUser(data);
-      });
+      return changeUserProfile(name, avatar, token).then(setCurrentUser);
     };
     handleSubmit(updateUser);
   };
@@ -151,26 +146,26 @@ function App() {
   // add clothing item
   const handleAddItem = (item) => {
     const token = localStorage.getItem("jwt");
-    addNewClothes(item, token)
-      .then((item) => {
+    const addNewItem = () => {
+      return addNewClothes(item, token).then((item) => {
         setClothingItems([item, ...clothingItems]);
-        handleCloseModal();
-      })
-      .catch((err) => console.error(`addItem: ${err}`));
+      });
+    };
+    handleSubmit(addNewItem);
   };
 
   // delete clothing items
   const handleDeleteItem = (selectedItem) => {
     const token = localStorage.getItem("jwt");
-    deleteClothingItem(selectedItem._id, token)
-      .then(() => {
+    const deleteItem = () => {
+      return deleteClothingItem(selectedItem._id, token).then(() => {
         const updatedClothingItems = clothingItems.filter((item) => {
           return item._id !== selectedItem._id;
         });
         setClothingItems(updatedClothingItems);
-        handleCloseModal();
-      })
-      .catch((err) => console.error(`deleteItem: ${err}`));
+      });
+    };
+    handleSubmit(deleteItem);
   };
 
   // handle like on item card
@@ -187,7 +182,7 @@ function App() {
             cards.map((c) => (c._id === _id ? updatedCard : c))
           );
         })
-        .catch((err) => console.log(err));
+        .catch(console.error);
     } else {
       // if not, send a request to remove the user's id from the card's likes array
       // the first argument is the card's id
@@ -197,7 +192,7 @@ function App() {
             cards.map((c) => (c._id === _id ? updatedCard : c))
           );
         })
-        .catch((err) => console.log(err));
+        .catch(console.error);
     }
   };
 
@@ -341,6 +336,7 @@ function App() {
               onClose={handleCloseModal}
               onSubmit={handleProfileChange}
               isLoading={isLoading}
+              currentUser={currentUser}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>

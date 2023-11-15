@@ -2,15 +2,21 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function ChangeProfileModal({ isOpen, onClose, onSubmit, isLoading }) {
+function ChangeProfileModal({
+  isOpen,
+  onClose,
+  onSubmit,
+  isLoading,
+  currentUser,
+}) {
   // declare state for each input field
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 
   // use a useEffect hook to reset the input field state to empty strings when
   useEffect(() => {
-    setName("");
-    setAvatar("");
+    setName(currentUser.name);
+    setAvatar(currentUser.avatar);
   }, [isOpen]);
 
   // the modal is opened

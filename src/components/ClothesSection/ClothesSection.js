@@ -12,11 +12,9 @@ function ClothesSection({
   onCardLike,
   isLoggedIn,
 }) {
-  const currentContext = useContext(CurrentUserContext);
-  const currentUserId = currentContext?._id;
-  const filteredItems = clothingItems.filter(
-    (item) => item.owner === currentUserId
-  );
+  const { _id } = useContext(CurrentUserContext);
+
+  const filteredItems = clothingItems.filter((item) => item.owner === _id);
   return (
     <div className="clothes-section">
       <div className="clothes-section__title">
