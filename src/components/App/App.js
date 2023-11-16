@@ -173,28 +173,26 @@ function App() {
     console.log(likes);
     const token = localStorage.getItem("jwt");
     // Check if this card is now liked
-    if (!likes) {
-      // if(likes){
-      // if so, send a request to add the user's id to the card's likes array
-      // the first argument is the card's id
-      addCardLike(_id, owner, token)
-        .then((updatedCard) => {
-          setClothingItems((cards) => {
-            return cards.map((c) => (c._id === _id ? updatedCard : c));
-          });
-        })
-        .catch(console.error);
-    } else {
-      // if not, send a request to remove the user's id from the card's likes array
-      // the first argument is the card's id
-      removeCardLike(_id, owner, token)
-        .then((updatedCard) => {
-          setClothingItems((cards) => {
-            return cards.map((c) => (c._id === _id ? updatedCard : c));
-          });
-        })
-        .catch(console.error);
-    }
+    // if (!likes) {
+    likes
+      ? // if so, send a request to add the user's id to the card's likes array
+        // the first argument is the card's id
+        addCardLike(_id, owner, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) => {
+              return cards.map((c) => (c._id === _id ? updatedCard : c));
+            });
+          })
+          .catch(console.error)
+      : // if not, send a request to remove the user's id from the card's likes array
+        // the first argument is the card's id
+        removeCardLike(_id, owner, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) => {
+              return cards.map((c) => (c._id === _id ? updatedCard : c));
+            });
+          })
+          .catch(console.error);
   };
 
   // check if there is token on user client
