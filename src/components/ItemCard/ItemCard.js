@@ -12,6 +12,11 @@ function ItemCard({ item, onSelectedCard, onCardLike, isLoggedIn }) {
   }`;
   const itemLikeBtnSrc = `${isLiked ? Liked : likeBtn}`;
 
+  const handleLike = (evt) => {
+    evt.preventDefault();
+    onCardLike({ _id: item._id, owner: item.owner, isLiked });
+  };
+
   return (
     <li className="item__card">
       <img
@@ -26,7 +31,7 @@ function ItemCard({ item, onSelectedCard, onCardLike, isLoggedIn }) {
           src={itemLikeBtnSrc}
           alt="like button"
           className={itemLikeBtnClassName}
-          onClick={() => onCardLike(item)}
+          onClick={handleLike}
         />
       </div>
     </li>
