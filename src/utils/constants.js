@@ -12,7 +12,10 @@ import nightStorm from "../images/night/nightStorm.svg";
 import nightSnow from "../images/night/nightSnow.svg";
 import nightFog from "../images/night/nightFog.svg";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "api.wtwrbymum.crabdance.com"
+    : "http://localhost:3001";
 
 const weatherImgs = [
   { url: daySunny, day: true, type: "sunny" },
