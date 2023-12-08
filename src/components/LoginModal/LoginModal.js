@@ -42,7 +42,7 @@ function LoginModal({ isOpen, onClose, onSubmit, onAltOptionBtn, isLoading }) {
       onAltOptionBtn={onAltOptionBtn}
     >
       <label className="modal__label">
-        Emai
+        Email
         <input
           className="modal__input"
           type="email"

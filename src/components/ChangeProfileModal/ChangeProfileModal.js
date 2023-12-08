@@ -17,7 +17,7 @@ function ChangeProfileModal({
   useEffect(() => {
     setName(currentUser.name);
     setAvatar(currentUser.avatar);
-  }, [isOpen]);
+  }, [isOpen, currentUser]);
 
   // the modal is opened
   const handleNameChange = (evt) => {

@@ -214,7 +214,7 @@ function App() {
     } else {
       setLoggedIn(false);
     }
-  }, [loggedIn, history]);
+  }, [loggedIn, history, currentUser]);
 
   // close modal by pressing esc
   useEffect(() => {

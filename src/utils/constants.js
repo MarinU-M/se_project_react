@@ -14,7 +14,7 @@ import nightFog from "../images/night/nightFog.svg";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "api.wtwrbymum.crabdance.com"
+    ? "https://api.wtwrbymum.crabdance.com"
     : "http://localhost:3001";
 
 const weatherImgs = [
