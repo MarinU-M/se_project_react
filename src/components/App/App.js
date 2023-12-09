@@ -92,6 +92,7 @@ function App() {
     const addNewUser = () => {
       return signUp({ name, avatar, email, password }).then((user) => {
         const { email, password } = user;
+        console.log(user);
         console.log(email, password);
         handleLogin({ email, password });
       });
@@ -214,7 +215,7 @@ function App() {
     } else {
       setLoggedIn(false);
     }
-  }, [loggedIn, history, currentUser]);
+  }, [loggedIn]);
 
   // close modal by pressing esc
   useEffect(() => {
