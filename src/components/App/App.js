@@ -90,10 +90,7 @@ function App() {
   // signup user
   const handleSignUp = ({ name, avatar, email, password }) => {
     const addNewUser = () => {
-      return signUp({ name, avatar, email, password }).then((user) => {
-        const { email, password } = user;
-        console.log(user);
-        console.log(email, password);
+      return signUp({ name, avatar, email, password }).then(() => {
         handleLogin({ email, password });
       });
     };
