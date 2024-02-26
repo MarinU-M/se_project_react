@@ -3,14 +3,19 @@
 ### Overview
 
 - Intro
+- GitHub page (06/07 added)
 - Figma
 - Images
-- GitHub page (06/07 added)
 - Technologies (06/18 updated)
 
 **Intro**
 
 This project is made to help you to decide your daily outfit according to today's temperature. Clothes cards are fetched from a server via API, and weather information is fetched from [OpenWeather](https://openweathermap.org/).
+
+**GitHub page**
+
+- [Deployed page](https://wtwrbymum.crabdance.com/#/)
+- [Backend of this app](https://github.com/MarinU-M/se_project_express)
 
 **Figma**
 
@@ -36,10 +41,6 @@ When users click a clothes card, the details will be popped up.
 The card can be easily deleted.
 ![image](https://github.com/MarinU-M/se_project_react/assets/133256866/613f013c-1193-446c-902f-163f1215be36)
 
-**GitHub page**
-
-- [Deployed page](https://wtwrbymum.crabdance.com/#/)
-- [Backend of this app](https://github.com/MarinU-M/se_project_express)
 
 **Technologies**
 
